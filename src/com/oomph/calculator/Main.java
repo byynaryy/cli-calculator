@@ -4,11 +4,11 @@ package com.oomph.calculator;
 public class Main {
     static void main() {
         String calculation = IO.readln("Enter your calculation: ");
-        System.out.println(calculation);
         String[]  items = calculation.split("(?<=[+\\-*/])|(?=[+\\-*/])");
         int a = Integer.parseInt(items[0]);
         String op = items[1];
         int b = Integer.parseInt(items[2]);
+
         int result;
 
         switch (op) {
@@ -29,6 +29,5 @@ public class Main {
         }
 
         System.out.println(result);
-
     }
 }
