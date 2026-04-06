@@ -9,13 +9,14 @@ public class Calculator {
         Stack<Integer> digits = new Stack<>();
         Stack<Character> ops = new Stack<>();
 
-        for(int i = 0; i <= items.length; i++) {
-            if(isInt(items[i])) {
-                digits.push(Integer.parseInt(items[i].trim()));
+        for(String item: items) {
+            if(item.matches("\\d+")) {
+                digits.push(Integer.parseInt(item));
             } else {
-                ops.push(items[i].trim());
+                ops.push(item.charAt(0));
             }
         }
+        System.out.println(ops.get(1));
 
 
 
@@ -44,12 +45,4 @@ public class Calculator {
         System.out.println(result);
     }
 
-    private static boolean isInt(String s) {
-        try {
-            Integer.parseInt(s.trim());
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
 }
