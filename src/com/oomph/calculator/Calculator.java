@@ -4,39 +4,38 @@ import java.util.Stack;
 
 public class Calculator {
     public static void calculate(String calculation) {
-        String[] items = calculation.split("(?<=[+\\-*/])|(?=[+\\-*/])");
+        String[] elements = calculation.split("(?<=[+\\-*/])|(?=[+\\-*/])");
 
         Stack<Integer> digits = new Stack<>();
         Stack<Character> ops = new Stack<>();
 
-        for(String item: items) {
-            if(item.matches("\\d+")) {
-                digits.push(Integer.parseInt(item));
+        for(String element: elements) {
+            if(element.matches("\\d+")) {
+                digits.push(Integer.parseInt(element));
             } else {
-                ops.push(item.charAt(0));
+                ops.push(element.charAt(0));
             }
         }
-        System.out.println(ops.get(1));
-
-
-
-        int a = Integer.parseInt(items[0].trim());
-        String op = items[1].trim();
-        int b = Integer.parseInt(items[2].trim());
+        System.out.println(ops.get(0));
 
         int result;
+        Character op = ops.get(0);
+        int a = digits.pop();
+        int b = digits.pop();
+        System.out.println(a);
+        System.out.println(b);
 
         switch (op) {
-            case "+":
+            case '+':
                 result = a + b;
                 break;
-            case "-":
+            case '-':
                 result = a - b;
                 break;
-            case "*":
+            case '*':
                 result = a * b;
                 break;
-            case "/":
+            case '/':
                 result = a / b;
                 break;
             default:
