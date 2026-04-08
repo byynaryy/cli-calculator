@@ -3,7 +3,7 @@ package com.oomph.calculator;
 import java.util.Stack;
 
 public class Calculator {
-    public static void calculate(String calculation) {
+    public void calculate(String calculation) {
         String[] elements = calculation.split("(?<=[+\\-*/])|(?=[+\\-*/])");
 
         Stack<Integer> digits = new Stack<>();
@@ -41,6 +41,7 @@ public class Calculator {
             default:
                 throw new IllegalArgumentException("Unknown operator: " + op);
         }
+
         System.out.println(result);
     }
 
