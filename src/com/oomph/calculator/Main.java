@@ -8,6 +8,7 @@ public class Main {
             String calculation = IO.readln("Enter your calculation: ").trim();
             if (calculation.equalsIgnoreCase("quit")) break;
             if (calculation.isEmpty()) continue;
+            if (!Validator.isValid(calculation)) continue;
             calc.calculate(calculation);
         }
     }
