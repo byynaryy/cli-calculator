@@ -8,13 +8,13 @@ public class Calculator {
 
         Stack<Integer> digits = new Stack<>();
         Stack<Character> ops = new Stack<>();
+        char op = ' ';
 
         for(String element: elements) {
             if(element.matches("\\d+")) {
                 digits.push(Integer.parseInt(element));
             } else {
-                char op = element.charAt(0);
-                evaluate(digits, op);
+                op = element.charAt(0);
                 ops.push(op);
             }
         }
@@ -25,8 +25,8 @@ public class Calculator {
 
     private int evaluate(Stack<Integer> digits, char op) {
         int result;
-        int a = digits.pop();
         int b = digits.pop();
+        int a = digits.pop();
 
         result = switch (op) {
             case '+' -> a + b;
