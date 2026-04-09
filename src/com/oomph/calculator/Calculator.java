@@ -25,6 +25,13 @@ public class Calculator {
         System.out.println(a);
         System.out.println(b);
 
+        handleOperator(digits, ops);
+
+
+    }
+
+    private void handleOperator(Stack<Integer> digits, Stack<Character> ops) {
+
         switch (op) {
             case '+':
                 result = a + b;
@@ -42,7 +49,6 @@ public class Calculator {
                 throw new IllegalArgumentException("Unknown operator: " + op);
         }
 
-        System.out.println(result);
     }
 
 }
