@@ -3,7 +3,7 @@ package com.oomph.calculator;
 import java.util.Stack;
 
 public class Calculator {
-    public void calculate(String calculation) {
+    public int calculate(String calculation) {
         String[] elements = calculation.split("(?<=[+\\-*/])|(?=[+\\-*/])");
 
         Stack<Integer> digits = new Stack<>();
@@ -16,38 +16,26 @@ public class Calculator {
                 ops.push(element.charAt(0));
             }
         }
-        System.out.println(ops.get(0));
 
-        int result;
-        Character op = ops.get(0);
-        int a = digits.pop();
-        int b = digits.pop();
-        System.out.println(a);
-        System.out.println(b);
-
-        handleOperator(digits, ops);
-
+        return evaluate(digits, ops);
 
     }
 
-    private void handleOperator(Stack<Integer> digits, Stack<Character> ops) {
+    private int evaluate(Stack<Integer> digits, Stack<Character> ops) {
+        int result;
+        int a = digits.pop();
+        int b = digits.pop();
+        Character op = ops.pop();
 
-        switch (op) {
-            case '+':
-                result = a + b;
-                break;
-            case '-':
-                result = a - b;
-                break;
-            case '*':
-                result = a * b;
-                break;
-            case '/':
-                result = a / b;
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown operator: " + op);
-        }
+        result = switch (op) {
+            case '+' -> a + b;
+            case '-' -> a - b;
+            case '*' -> a * b;
+            case '/' -> a / b;
+            default -> throw new IllegalArgumentException("Unknown operator: " + ops);
+        };
+
+        return result;
 
     }
 

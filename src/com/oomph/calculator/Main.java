@@ -9,7 +9,7 @@ public class Main {
             if (calculation.equalsIgnoreCase("quit")) break;
             if (calculation.isEmpty()) continue;
             if (!Validator.isValid(calculation)) continue;
-            calc.calculate(calculation);
+            System.out.println(calc.calculate(calculation));
         }
     }
 }
