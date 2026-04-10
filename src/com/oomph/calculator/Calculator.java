@@ -8,36 +8,43 @@ public class Calculator {
 
         Stack<Integer> digits = new Stack<>();
         Stack<Character> ops = new Stack<>();
-        char op = ' ';
 
         for(String element: elements) {
             if(element.matches("\\d+")) {
                 digits.push(Integer.parseInt(element));
             } else {
-                op = element.charAt(0);
+                char op = element.charAt(0);
+                while (!ops.empty()) {
+                    if(isLowPrecedence(ops.peek())) break;
+                    evaluate(digits, ops.pop());
+                }
                 ops.push(op);
             }
         }
 
-        return evaluate(digits, op);
+        while (!ops.empty()) {
+            evaluate(digits, ops.pop());
+        }
+
+        return digits.pop();
 
     }
 
-    private int evaluate(Stack<Integer> digits, char op) {
-        int result;
+    private boolean isLowPrecedence(char op) {
+        return op == '+' || op == '-';
+    }
+
+    private void evaluate(Stack<Integer> digits, char op) {
         int b = digits.pop();
         int a = digits.pop();
 
-        result = switch (op) {
-            case '+' -> a + b;
-            case '-' -> a - b;
-            case '*' -> a * b;
-            case '/' -> a / b;
+        switch (op) {
+            case '+' -> digits.push(a + b);
+            case '-' -> digits.push(a - b);
+            case '*' -> digits.push(a * b);
+            case '/' -> digits.push(a / b);
             default -> throw new IllegalArgumentException("Unknown operator: " + op);
-        };
-
-        return result;
-
+        }
     }
 
 }
